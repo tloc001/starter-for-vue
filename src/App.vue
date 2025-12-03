@@ -4,6 +4,9 @@ import { client, getEndpoint, getProjectId, getProjectName } from '@/lib/appwrit
 import { AppwriteException } from 'appwrite'
 import AppwriteSvg from '@/assets/appwrite.svg'
 import VueSvg from '@/assets/vue.svg'
+import RegisterForm from '@/components/RegisterForm.vue'
+
+const showRegister = ref(false)
 
 const detailHeight = ref(0)
 const logs = ref([])
@@ -58,7 +61,10 @@ const sendPing = async () => {
 </script>
 
 <template>
+  <!-- Toggle between Register Form and Main Content -->
+  <RegisterForm v-if="showRegister" />
   <main
+    v-else
     class="checker-background flex flex-col items-center p-5"
     :style="{ marginBottom: `${detailHeight}px` }"
   >
@@ -148,6 +154,14 @@ const sendPing = async () => {
         :style="{ visibility: status === 'loading' ? 'hidden' : 'visible' }"
       >
         <span class="text-white">Send a ping</span>
+      </button>
+      
+      <!-- Button to toggle Register form -->
+      <button
+        @click="showRegister = !showRegister"
+        class="mt-4 cursor-pointer rounded-md bg-[#2D2D31] px-2.5 py-1.5"
+      >
+        <span class="text-white">{{ showRegister ? 'Quay lại' : 'Đăng ký tài khoản' }}</span>
       </button>
     </section>
 
